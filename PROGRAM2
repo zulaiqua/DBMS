@@ -1,0 +1,141 @@
+mysql> create database 5cs3_b2_order;
+Query OK, 1 row affected (0.23 sec)
+
+mysql> use 5cs3_b2_order;
+Database changed
+mysql> create table SALESMAN(salesman_id int(10)primary key,name varchar(15),city varchar(15),commission int(10));
+Query OK, 0 rows affected (0.25 sec)
+
+mysql> drop table SALESMAN;
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> create table SALESMAN(salesman_id int(10)primary key,name varchar(15),city varchar(15),commission int(10));
+Query OK, 0 rows affected (0.13 sec)
+
+mysql> create table CUSTOMER(customer_id int(10)primary key,cust_name varchar(15),city varchar(15),grade varchar(4),salesman_id int(10),foreign key(salesman_id)references SALESMAN(salesman_id) on delete cascade on update cascade);
+Query OK, 0 rows affected (0.34 sec)
+
+mysql> create table ORDERS(ord_no int(10)primary key,purchase_amt int(10),order_date date,customer_id int(10),salesman_id int(10),foreign key(customer_id)references CUSTOMER(customer_id) on delete cascade on update cascade,foreign key(salesman_id)references SALESMAN(salesman_id) on delete cascade on update cascade);
+Query OK, 0 rows affected (0.26 sec)
+
+mysql> desc SALESMAN;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| salesman_id | int(10)     | NO   | PRI | NULL    |       |
+| name        | varchar(15) | YES  |     | NULL    |       |
+| city        | varchar(15) | YES  |     | NULL    |       |
+| commission  | int(10)     | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> desc CUSTOMER;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| customer_id | int(10)     | NO   | PRI | NULL    |       |
+| cust_name   | varchar(15) | YES  |     | NULL    |       |
+| city        | varchar(15) | YES  |     | NULL    |       |
+| grade       | varchar(4)  | YES  |     | NULL    |       |
+| salesman_id | int(10)     | YES  | MUL | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> desc ORDER;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ORDER' at line 1
+mysql> desc ORDERS;
++--------------+---------+------+-----+---------+-------+
+| Field        | Type    | Null | Key | Default | Extra |
++--------------+---------+------+-----+---------+-------+
+| ord_no       | int(10) | NO   | PRI | NULL    |       |
+| purchase_amt | int(10) | YES  |     | NULL    |       |
+| order_date   | date    | YES  |     | NULL    |       |
+| customer_id  | int(10) | YES  | MUL | NULL    |       |
+| salesman_id  | int(10) | YES  | MUL | NULL    |       |
++--------------+---------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> insert into SALESMAN values("10","akash","mangalore","2");
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into SALESMAN values("20","ram","bangalore","10");
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into SALESMAN values("30","raj","mangalore","5");
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into SALESMAN values("40","kiran","mysore","15");
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into SALESMAN values("50","shreya","bangalore","3");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into CUSTOMER values("1000","avinash","mangalore","400","10");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into CUSTOMER values("2000","kumar","udupi","200","20");
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into CUSTOMER values("3000","prithi","mysore","300","40");
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into CUSTOMER values("4000","smitha","mangalore","300","30");
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into CUSTOMER values("5000","varshini","mysore","400","50");
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into ORDER values("551","5000","2020-01-04","1000","10");
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ORDER values("551","5000","2020-01-04","1000","10")' at line 1
+mysql> insert into ORDERS values("551","5000","2020-01-04","1000","10");
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into ORDERS values("552","2500","2020-02-05","2000","20");
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into ORDERS values("553","500","2020-03-03","3000","40");
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into ORDERS values("554","1500","2020-04-02","4000","30");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into ORDERS values("555","2000","2020-06-03","2000","10");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from SALESMAN;
++-------------+--------+-----------+------------+
+| salesman_id | name   | city      | commission |
++-------------+--------+-----------+------------+
+|          10 | akash  | mangalore |          2 |
+|          20 | ram    | bangalore |         10 |
+|          30 | raj    | mangalore |          5 |
+|          40 | kiran  | mysore    |         15 |
+|          50 | shreya | bangalore |          3 |
++-------------+--------+-----------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from CUSTOMER;
++-------------+-----------+-----------+-------+-------------+
+| customer_id | cust_name | city      | grade | salesman_id |
++-------------+-----------+-----------+-------+-------------+
+|        1000 | avinash   | mangalore | 400   |          10 |
+|        2000 | kumar     | udupi     | 200   |          20 |
+|        3000 | prithi    | mysore    | 300   |          40 |
+|        4000 | smitha    | mangalore | 300   |          30 |
+|        5000 | varshini  | mysore    | 400   |          50 |
++-------------+-----------+-----------+-------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from ORDERS;
++--------+--------------+------------+-------------+-------------+
+| ord_no | purchase_amt | order_date | customer_id | salesman_id |
++--------+--------------+------------+-------------+-------------+
+|    551 |         5000 | 2020-01-04 |        1000 |          10 |
+|    552 |         2500 | 2020-02-05 |        2000 |          20 |
+|    553 |          500 | 2020-03-03 |        3000 |          40 |
+|    554 |         1500 | 2020-04-02 |        4000 |          30 |
+|    555 |         2000 | 2020-06-03 |        2000 |          10 |
++--------+--------------+------------+-------------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> 
