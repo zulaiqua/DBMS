@@ -202,3 +202,108 @@ mysql> select  * from SALESMAN,CUSTOMER where SALESMAN.salesman_id=CUSTOMER.sale
 |          50 | shreya | bangalore |          3 |        5000 | varshini  | mysore    | 400   |          50 |
 +-------------+--------+-----------+------------+-------------+-----------+-----------+-------+-------------+
 5 rows in set (0.02 sec)
+
+
+mysql> insert into CUSTOMER values("6000","raj","chennai","500","10");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> SELECT * FROM CUSTOMER;
++-------------+-----------+-----------+-------+-------------+
+| customer_id | cust_name | city      | grade | salesman_id |
++-------------+-----------+-----------+-------+-------------+
+|        1000 | avinash   | bangalore | 400   |          10 |
+|        2000 | kumar     | udupi     | 200   |          20 |
+|        3000 | prithi    | mysore    | 300   |          40 |
+|        4000 | smitha    | bangalore | 300   |          30 |
+|        5000 | varshini  | mysore    | 400   |          50 |
+|        6000 | raj       | chennai   | 500   |          10 |
++-------------+-----------+-----------+-------+-------------+
+6 rows in set (0.00 sec)
+
+mysql> select  * from SALESMAN,CUSTOMER where SALESMAN.salesman_id=CUSTOMER.salesman_id;
++-------------+--------+-----------+------------+-------------+-----------+-----------+-------+-------------+
+| salesman_id | name   | city      | commission | customer_id | cust_name | city      | grade | salesman_id |
++-------------+--------+-----------+------------+-------------+-----------+-----------+-------+-------------+
+|          10 | akash  | mangalore |          2 |        1000 | avinash   | bangalore | 400   |          10 |
+|          20 | ram    | bangalore |         10 |        2000 | kumar     | udupi     | 200   |          20 |
+|          40 | kiran  | mysore    |         15 |        3000 | prithi    | mysore    | 300   |          40 |
+|          30 | raj    | mangalore |          5 |        4000 | smitha    | bangalore | 300   |          30 |
+|          50 | shreya | bangalore |          3 |        5000 | varshini  | mysore    | 400   |          50 |
+|          10 | akash  | mangalore |          2 |        6000 | raj       | chennai   | 500   |          10 |
++-------------+--------+-----------+------------+-------------+-----------+-----------+-------+-------------+
+6 rows in set (0.00 sec)
+
+mysql> select count(*) from SALESMAN,CUSTOMER where SALESMAN.salesman_id=CUSTOMER.salesman_id;
++----------+
+| count(*) |
++----------+
+|        6 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select count(*) from SALESMAN,CUSTOMER where SALESMAN.salesman_id=CUSTOMER.salesman_id group by SALESMAN.salesman_id;
++----------+
+| count(*) |
++----------+
+|        2 |
+|        1 |
+|        1 |
+|        1 |
+|        1 |
++----------+
+5 rows in set (0.00 sec)
+
+mysql> select count(*),SALESMAN.salesman_id from SALESMAN,CUSTOMER where SALESMAN.salesman_id=CUSTOMER.salesman_id group by SALESMAN.salesman_id;
++----------+-------------+
+| count(*) | salesman_id |
++----------+-------------+
+|        2 |          10 |
+|        1 |          20 |
+|        1 |          30 |
+|        1 |          40 |
+|        1 |          50 |
++----------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> select count(*),SALESMAN.salesman_id from SALESMAN,CUSTOMER where SALESMAN.salesman_id=CUSTOMER.salesman_id group by SALESMAN.salesman_id having count(*)>1;
++----------+-------------+
+| count(*) | salesman_id |
++----------+-------------+
+|        2 |          10 |
++----------+-------------+
+1 row in set (0.00 sec)
+
+mysql> select SALESMAN.name,SALESMAN.salesman_id,count(*) from SALESMAN,CUSTOMER where SALESMAN.salesman_id=CUSTOMER.salesman_id group by SALESMAN.salesman_id having count(*)>1;
++-------+-------------+----------+
+| name  | salesman_id | count(*) |
++-------+-------------+----------+
+| akash |          10 |        2 |
++-------+-------------+----------+
+1 row in set (0.00 sec)
+
+mysql> select * from SALESMAN;
++-------------+--------+-----------+------------+
+| salesman_id | name   | city      | commission |
++-------------+--------+-----------+------------+
+|          10 | akash  | mangalore |          2 |
+|          20 | ram    | bangalore |         10 |
+|          30 | raj    | mangalore |          5 |
+|          40 | kiran  | mysore    |         15 |
+|          50 | shreya | bangalore |          3 |
++-------------+--------+-----------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from CUSTOMER;
++-------------+-----------+-----------+-------+-------------+
+| customer_id | cust_name | city      | grade | salesman_id |
++-------------+-----------+-----------+-------+-------------+
+|        1000 | avinash   | bangalore | 400   |          10 |
+|        2000 | kumar     | udupi     | 200   |          20 |
+|        3000 | prithi    | mysore    | 300   |          40 |
+|        4000 | smitha    | bangalore | 300   |          30 |
+|        5000 | varshini  | mysore    | 400   |          50 |
+|        6000 | raj       | chennai   | 500   |          10 |
++-------------+-----------+-----------+-------+-------------+
+6 rows in set (0.01 sec)
+
+
