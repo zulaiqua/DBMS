@@ -138,4 +138,67 @@ mysql> select * from ORDERS;
 +--------+--------------+------------+-------------+-------------+
 5 rows in set (0.00 sec)
 
-mysql> 
+mysql> update CUSTOMER set city='bangalore' where customer_id=1000;
+Query OK, 1 row affected (0.07 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update CUSTOMER set city='bangalore' where customer_id=4000;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from CUSTOMER;
++-------------+-----------+-----------+-------+-------------+
+| customer_id | cust_name | city      | grade | salesman_id |
++-------------+-----------+-----------+-------+-------------+
+|        1000 | avinash   | bangalore | 400   |          10 |
+|        2000 | kumar     | udupi     | 200   |          20 |
+|        3000 | prithi    | mysore    | 300   |          40 |
+|        4000 | smitha    | bangalore | 300   |          30 |
+|        5000 | varshini  | mysore    | 400   |          50 |
++-------------+-----------+-----------+-------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> select avg(grade) from CUSTOMER where city='bangalore';
++------------+
+| avg(grade) |
++------------+
+|        350 |
++------------+
+1 row in set (0.01 sec)
+
+mysql> select avg(grade) from CUSTOMER ;
++------------+
+| avg(grade) |
++------------+
+|        320 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select count(customer_id),grade from customer where grades>(select avg(grade) from CUSTOMER where city='bangalore';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> select count(customer_id),grade from CUSTOMER where grades>(select avg(gr
+ades) from CUSTOMER where city='bangalore';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> select count(*) from CUSTOMER where grade>(select avg(grades) from CUSTOMER where city='bangalore';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> select count(*) from CUSTOMER where grade>(select avg(grades) from CUSTOMER where city='bangalore');
+ERROR 1054 (42S22): Unknown column 'grades' in 'field list'
+mysql> select count(*) from CUSTOMER where grade>(select avg(grade) from CUSTOMER where city='bangalore');
++----------+
+| count(*) |
++----------+
+|        2 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select  * from SALESMAN,CUSTOMER where SALESMAN.salesman_id=CUSTOMER.salesman_id;
++-------------+--------+-----------+------------+-------------+-----------+-----------+-------+-------------+
+| salesman_id | name   | city      | commission | customer_id | cust_name | city      | grade | salesman_id |
++-------------+--------+-----------+------------+-------------+-----------+-----------+-------+-------------+
+|          10 | akash  | mangalore |          2 |        1000 | avinash   | bangalore | 400   |          10 |
+|          20 | ram    | bangalore |         10 |        2000 | kumar     | udupi     | 200   |          20 |
+|          40 | kiran  | mysore    |         15 |        3000 | prithi    | mysore    | 300   |          40 |
+|          30 | raj    | mangalore |          5 |        4000 | smitha    | bangalore | 300   |          30 |
+|          50 | shreya | bangalore |          3 |        5000 | varshini  | mysore    | 400   |          50 |
++-------------+--------+-----------+------------+-------------+-----------+-----------+-------+-------------+
+5 rows in set (0.02 sec)
