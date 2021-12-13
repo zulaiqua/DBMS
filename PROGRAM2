@@ -417,6 +417,61 @@ mysql> select * from v1;
 |          20 |
 +-------------+
 
+select * from CUSTOMER;
++-------------+-----------+-----------+-------+-------------+
+| customer_id | cust_name | city      | grade | salesman_id |
++-------------+-----------+-----------+-------+-------------+
+|        1000 | avinash   | bangalore | 400   |          10 |
+|        2000 | kumar     | udupi     | 200   |          20 |
+|        3000 | prithi    | mysore    | 300   |          40 |
+|        4000 | smitha    | bangalore | 300   |          30 |
+|        5000 | varshini  | mysore    | 400   |          50 |
+|        6000 | raj       | chennai   | 500   |          10 |
++-------------+-----------+-----------+-------+-------------+
+6 rows in set (0.00 sec)
+
+mysql> update SALESMAN set salesman_id=1000 where salesman_id=10;
+Query OK, 1 row affected (0.08 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from CUSTOMER;
++-------------+-----------+-----------+-------+-------------+
+| customer_id | cust_name | city      | grade | salesman_id |
++-------------+-----------+-----------+-------+-------------+
+|        1000 | avinash   | bangalore | 400   |        1000 |
+|        2000 | kumar     | udupi     | 200   |          20 |
+|        3000 | prithi    | mysore    | 300   |          40 |
+|        4000 | smitha    | bangalore | 300   |          30 |
+|        5000 | varshini  | mysore    | 400   |          50 |
+|        6000 | raj       | chennai   | 500   |        1000 |
++-------------+-----------+-----------+-------+-------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from SALESMAN;
++-------------+--------+-----------+------------+
+| salesman_id | name   | city      | commission |
++-------------+--------+-----------+------------+
+|          20 | ram    | bangalore |         10 |
+|          30 | raj    | mangalore |          5 |
+|          40 | kiran  | mysore    |         15 |
+|          50 | shreya | bangalore |          3 |
+|        1000 | akash  | mangalore |          2 |
++-------------+--------+-----------+------------+
+5 rows in set (0.00 sec)
+
+mysql> delete from SALESMAN where salesman_id=1000;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from SALESMAN;
++-------------+--------+-----------+------------+
+| salesman_id | name   | city      | commission |
++-------------+--------+-----------+------------+
+|          20 | ram    | bangalore |         10 |
+|          30 | raj    | mangalore |          5 |
+|          40 | kiran  | mysore    |         15 |
+|          50 | shreya | bangalore |          3 |
++-------------+--------+-----------+------------+
+4 rows in set (0.00 sec)
 
 
 
