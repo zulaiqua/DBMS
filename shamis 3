@@ -10,7 +10,7 @@ create table MOVIES(Mov_id int(10) primary key,Mov_Title varchar(15),Mov_Year in
 
 create table MOVIE_CAST(Act_id int(10),Mov_id int(10),Role varchar(10),primary key(Act_id,Mov_id),foreign key(Act_id) references ACTOR(Act_id) on delete cascade on update cascade,foreign key(Mov_id) references MOVIES(Mov_id) on delete cascade on update cascade);
 
-create table RATING(Mov_id int(10),foreign key(Mov_id) references MOVIES(Mov_id) on delete cascade on update cascade,Rev_Stars int(10));
+create table RATING(Mov_id int(10),foreign key(Mov_id) references MOVIES(Mov_id) on delete cascade on update cascade,Rev_Stars int(10),No_of_Ratings int(10));
 
  desc ACTOR;
 +------------+-------------+------+-----+---------+-------+
