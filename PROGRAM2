@@ -298,4 +298,14 @@ mysql> select * from CUSTOMER;
 +-------------+-----------+-----------+-------+-------------+
 6 rows in set (0.01 sec)
 
+mysql> select salesman_id from SALESMAN where exists(select * from CUSTOMER where CUSTOMER.salesman_id=SALESMAN.salesman_id and CUSTOMER.city=SALESMAN.city)union select salesman_id from SALESMAN where not exists(select * from CUSTOMER where CUSTOMER.salesman_id=SALESMAN.salesman_id and CUSTOMER.city=SALESMAN.city);
++-------------+
+| salesman_id |
++-------------+
+|          40 |
+|          10 |
+|          20 |
+|          30 |
+|          50 |
++-------------+
 
