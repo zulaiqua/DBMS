@@ -55,11 +55,13 @@ mysql> DESC MOVIE_CAST;
 3 rows in set (0.01 sec)
 
 mysql> DESC RATING;
-+-----------+---------+------+-----+---------+-------+
-| Field     | Type    | Null | Key | Default | Extra |
-+-----------+---------+------+-----+---------+-------+
-| Mov_id    | int(10) | YES  | MUL | NULL    |       |
-| Rev_Stars | int(10) | YES  |     | NULL    |       |
-+-----------+---------+------+-----+---------+-------+
-2 rows in set (0.00 sec)
++---------------+---------+------+-----+---------+-------+
+| Field         | Type    | Null | Key | Default | Extra |
++---------------+---------+------+-----+---------+-------+
+| Mov_id        | int(10) | YES  | MUL | NULL    |       |
+| Rev_Stars     | int(10) | YES  |     | NULL    |       |
+| No_of_Ratings | int(10) | YES  |     | NULL    |       |
++---------------+---------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
 
