@@ -1,0 +1,72 @@
+mysql> create database 5cs3_b2_movie;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use 5cs3_b2_movie;
+Database changed
+mysql> create table ACTOR(act_id int(10) primary key,act_name varchar(10),act_gender varchar(6));
+Query OK, 0 rows affected (0.25 sec)
+
+mysql> create table DIRECTOR(dir_id int(10)primary key,dir_name varchar(15),dir_phone int(10));
+Query OK, 0 rows affected (0.15 sec)
+
+
+mysql> create table MOVIES(mov_id int(10)primary key,mov_title varchar(15),mov_year int(4),mov_lang varchar(15),dir_id int(10),foreign key(dir_id)references DIRECTOR(dir_id) on delete cascade on update cascade);
+Query OK, 0 rows affected (0.29 sec)
+
+
+mysql> create table MOVIE_CAST(act_id int(10),mov_id int(10),role varchar(15),primary key(act_id,mov_id),foreign key(act_id)references ACTOR(act_id)on delete cascade on update cascade,foreign key(mov_id)references MOVIES(mov_id)on delete cascade on update cascade);
+Query OK, 0 rows affected (0.30 sec)
+
+mysql> create table RATING(mov_id int(10),foreign key(mov_id)references MOVIES(mov_id)on delete cascade on update cascade,rev_stars int(10));
+Query OK, 0 rows affected (0.20 sec)
+
+mysql> desc ACTOR;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| act_id     | int(10)     | NO   | PRI | NULL    |       |
+| act_name   | varchar(10) | YES  |     | NULL    |       |
+| act_gender | varchar(6)  | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+3 rows in set (0.04 sec)
+
+mysql> desc DIRECTOR;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| dir_id    | int(10)     | NO   | PRI | NULL    |       |
+| dir_name  | varchar(15) | YES  |     | NULL    |       |
+| dir_phone | int(10)     | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> desc MOVIES;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| mov_id    | int(10)     | NO   | PRI | NULL    |       |
+| mov_title | varchar(15) | YES  |     | NULL    |       |
+| mov_year  | int(4)      | YES  |     | NULL    |       |
+| mov_lang  | varchar(15) | YES  |     | NULL    |       |
+| dir_id    | int(10)     | YES  | MUL | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> desc MOVIE_CAST;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| act_id | int(10)     | NO   | PRI | NULL    |       |
+| mov_id | int(10)     | NO   | PRI | NULL    |       |
+| role   | varchar(15) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> desc RATING;
++-----------+---------+------+-----+---------+-------+
+| Field     | Type    | Null | Key | Default | Extra |
++-----------+---------+------+-----+---------+-------+
+| mov_id    | int(10) | YES  | MUL | NULL    |       |
+| rev_stars | int(10) | YES  |     | NULL    |       |
++-----------+---------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
