@@ -17,7 +17,7 @@ Query OK, 0 rows affected (0.29 sec)
 mysql> create table MOVIE_CAST(act_id int(10),mov_id int(10),role varchar(15),primary key(act_id,mov_id),foreign key(act_id)references ACTOR(act_id)on delete cascade on update cascade,foreign key(mov_id)references MOVIES(mov_id)on delete cascade on update cascade);
 Query OK, 0 rows affected (0.30 sec)
 
-mysql> create table RATING(mov_id int(10),foreign key(mov_id)references MOVIES(mov_id)on delete cascade on update cascade,rev_stars int(10));
+mysql> create table RATING(mov_id int(10),foreign key(mov_id)references MOVIES(mov_id)on delete cascade on update cascade,rev_stars int(10),no_of_ratings(10));
 Query OK, 0 rows affected (0.20 sec)
 
 mysql> desc ACTOR;
