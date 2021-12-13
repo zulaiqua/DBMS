@@ -309,3 +309,103 @@ mysql> select salesman_id from SALESMAN where exists(select * from CUSTOMER wher
 |          50 |
 +-------------+
 
+select * from ORDERS;
++--------+--------------+------------+-------------+-------------+
+| ord_no | purchase_amt | order_date | customer_id | salesman_id |
++--------+--------------+------------+-------------+-------------+
+|    551 |         5000 | 2020-01-04 |        1000 |          10 |
+|    552 |         2500 | 2020-02-05 |        2000 |          20 |
+|    553 |          500 | 2020-03-03 |        3000 |          40 |
+|    554 |         1500 | 2020-04-02 |        4000 |          30 |
+|    555 |         2000 | 2020-06-03 |        2000 |          10 |
++--------+--------------+------------+-------------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> insert into ORDERS values("556","2600","2020-02-05","2000","20");
+Query OK, 1 row affected (0.12 sec)
+
+mysql> select * from ORDERS;
++--------+--------------+------------+-------------+-------------+
+| ord_no | purchase_amt | order_date | customer_id | salesman_id |
++--------+--------------+------------+-------------+-------------+
+|    551 |         5000 | 2020-01-04 |        1000 |          10 |
+|    552 |         2500 | 2020-02-05 |        2000 |          20 |
+|    553 |          500 | 2020-03-03 |        3000 |          40 |
+|    554 |         1500 | 2020-04-02 |        4000 |          30 |
+|    555 |         2000 | 2020-06-03 |        2000 |          10 |
+|    556 |         2600 | 2020-02-05 |        2000 |          20 |
++--------+--------------+------------+-------------+-------------+
+6 rows in set (0.00 sec)
+
+
+mysql> select sum(purchase_amt) from ORDERS;
++-------------------+
+| sum(purchase_amt) |
++-------------------+
+|             14100 |
++-------------------+
+1 row in set (0.04 sec)
+
+mysql> select sum(purchase_amt) from ORDERS group by customer_id;
++-------------------+
+| sum(purchase_amt) |
++-------------------+
+|              5000 |
+|              7100 |
+|               500 |
+|              1500 |
++-------------------+
+4 rows in set (0.01 sec)
+
+mysql> select customer_id,sum(purchase_amt) from ORDERS group by customer_id;
++-------------+-------------------+
+| customer_id | sum(purchase_amt) |
++-------------+-------------------+
+|        1000 |              5000 |
+|        2000 |              7100 |
+|        3000 |               500 |
+|        4000 |              1500 |
++-------------+-------------------+
+4 rows in set (0.00 sec)
+
+
+mysql> select customer_id,sum(purchase_amt) from ORDERS group by customer_id,ord_no;
++-------------+-------------------+
+| customer_id | sum(purchase_amt) |
++-------------+-------------------+
+|        1000 |              5000 |
+|        2000 |              2500 |
+|        2000 |              2000 |
+|        2000 |              2600 |
+|        3000 |               500 |
+|        4000 |              1500 |
++-------------+-------------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from ORDERS limit 1;
++--------+--------------+------------+-------------+-------------+
+| ord_no | purchase_amt | order_date | customer_id | salesman_id |
++--------+--------------+------------+-------------+-------------+
+|    551 |         5000 | 2020-01-04 |        1000 |          10 |
++--------+--------------+------------+-------------+-------------+
+1 row in set (0.00 sec)
+
+mysql> select customer_id,sum(purchase_amt) from ORDERS group by customer_id,ord_no order by(sum(purchase_amt)) desc limit 1;
++-------------+-------------------+
+| customer_id | sum(purchase_amt) |
++-------------+-------------------+
+|        1000 |              5000 |
++-------------+-------------------+
+1 row in set (0.03 sec)
+
+
+mysql> select salesman_id from CUSTOMER where customer_id = (select customer_id from ORDERS group by customer_id,order_date order by sum(purchase_amt) desc  limit 1);
++-------------+
+| salesman_id |
++-------------+
+|          20 |
++-------------+
+1 row in set (0.02 sec)
+
+mysql> create view v1 as  select salesman_id from CUSTOMER where customer_id = (select customer_id from ORDERS group by customer_id,order_date order by sum(purchase_amt) desc  limit 1);
+Query OK, 0 rows affected (0.05 sec)
