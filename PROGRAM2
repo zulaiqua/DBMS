@@ -409,3 +409,14 @@ mysql> select salesman_id from CUSTOMER where customer_id = (select customer_id 
 
 mysql> create view v1 as  select salesman_id from CUSTOMER where customer_id = (select customer_id from ORDERS group by customer_id,order_date order by sum(purchase_amt) desc  limit 1);
 Query OK, 0 rows affected (0.05 sec)
+
+mysql> select * from v1;
++-------------+
+| salesman_id |
++-------------+
+|          20 |
++-------------+
+
+
+
+
