@@ -70,3 +70,337 @@ mysql> desc RATING;
 | rev_stars | int(10) | YES  |     | NULL    |       |
 +-----------+---------+------+-----+---------+-------+
 2 rows in set (0.00 sec)
+
+mysql> insert into ACTOR values(1,"daniel","M");
+Query OK, 1 row affected (0.17 sec)
+
+mysql> insert into ACTOR values(2,"emma","F");
+Query OK, 1 row affected (0.13 sec)
+
+mysql> insert into ACTOR values(3,"rupert","M");
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into ACTOR values(4,"robert","M");
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into ACTOR values(5,"emilia","F");
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into ACTOR values(6,"jennifer","F");
+Query OK, 1 row affected (0.07 sec)
+
+mysql> select * from ACTOR;
++--------+----------+------------+
+| act_id | act_name | act_gender |
++--------+----------+------------+
+|      1 | daniel   | M          |
+|      2 | emma     | F          |
+|      3 | rupert   | M          |
+|      4 | robert   | M          |
+|      5 | emilia   | F          |
+|      6 | jennifer | F          |
++--------+----------+------------+
+6 rows in set (0.00 sec)
+
+mysql> insert into DIRECTOR values(10,"james",9746323901);
+ERROR 1264 (22003): Out of range value for column 'dir_phone' at row 1
+mysql> drop table DIRECTOR;
+ERROR 1217 (23000): Cannot delete or update a parent row: a foreign key constraint fails
+mysql> desc DIRECTOR;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| dir_id    | int(10)     | NO   | PRI | NULL    |       |
+| dir_name  | varchar(15) | YES  |     | NULL    |       |
+| dir_phone | int(10)     | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+3 rows in set (0.08 sec)
+
+mysql> insert into DIRECTOR values(10,"james",9741);
+Query OK, 1 row affected (0.34 sec)
+
+mysql> insert into DIRECTOR values(20,"FRED",9742);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into DIRECTOR values(30,"david barron",9743);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into DIRECTOR values(40,"christopher nolan",9744);
+ERROR 1406 (22001): Data too long for column 'dir_name' at row 1
+mysql> insert into DIRECTOR values(40,"christ",9744);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into DIRECTOR values(50,"jane",9745);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into DIRECTOR values(60,"Hitchcock",9746);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into DIRECTOR values(70,"steven",9747);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from DIRECTOR;
++--------+--------------+-----------+
+| dir_id | dir_name     | dir_phone |
++--------+--------------+-----------+
+|     10 | james        |      9741 |
+|     20 | FRED         |      9742 |
+|     30 | david barron |      9743 |
+|     40 | christ       |      9744 |
+|     50 | jane         |      9745 |
+|     60 | Hitchcock    |      9746 |
+|     70 | steven       |      9747 |
++--------+--------------+-----------+
+7 rows in set (0.00 sec)
+
+mysql> insert into MOVIES values(100,"M1",2008,"english",10);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into MOVIES values(101,"M2",2010,"english",20);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into MOVIES values(102,"M3",1990,"english",30);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into MOVIES values(103,"M4",2010,"english",50);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into MOVIES values(104,"M5",2012,"english",50);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into MOVIES values(105,"M6",1992,"english",10);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into MOVIES values(106,"M7",1990,"english",20);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into MOVIES values(107,"M8",2015,"english",60);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into MOVIES values(108,"M9",2016,"english",60);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into MOVIES values(109,"M10",2016,"english",60);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into MOVIES values(110,"M11",2016,"english",70);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from MOVIES;
++--------+-----------+----------+----------+--------+
+| mov_id | mov_title | mov_year | mov_lang | dir_id |
++--------+-----------+----------+----------+--------+
+|    100 | M1        |     2008 | english  |     10 |
+|    101 | M2        |     2010 | english  |     20 |
+|    102 | M3        |     1990 | english  |     30 |
+|    103 | M4        |     2010 | english  |     50 |
+|    104 | M5        |     2012 | english  |     50 |
+|    105 | M6        |     1992 | english  |     10 |
+|    106 | M7        |     1990 | english  |     20 |
+|    107 | M8        |     2015 | english  |     60 |
+|    108 | M9        |     2016 | english  |     60 |
+|    109 | M10       |     2016 | english  |     60 |
+|    110 | M11       |     2016 | english  |     70 |
++--------+-----------+----------+----------+--------+
+11 rows in set (0.00 sec)
+
+mysql> insert into MOVIE_CAST values(1,100,"hero");
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into MOVIE_CAST values(2,101,"heroine");
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into MOVIE_CAST values(3,102,"hero");
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into MOVIE_CAST values(1,103,"hero");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into MOVIE_CAST values(5,103,"heroine");
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into MOVIE_CAST values(4,103,"supporting");
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into MOVIE_CAST values(1,104,"hero");
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into MOVIE_CAST values(4,105,"hero");
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into MOVIE_CAST values(6,106,"heroine");
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into MOVIE_CAST values(3,108,"hero");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from MOVIE_CAST;
++--------+--------+------------+
+| act_id | mov_id | role       |
++--------+--------+------------+
+|      1 |    100 | hero       |
+|      1 |    103 | hero       |
+|      1 |    104 | hero       |
+|      2 |    101 | heroine    |
+|      3 |    102 | hero       |
+|      3 |    108 | hero       |
+|      4 |    103 | supporting |
+|      4 |    105 | hero       |
+|      5 |    103 | heroine    |
+|      6 |    106 | heroine    |
++--------+--------+------------+
+10 rows in set (0.00 sec)
+
+mysql> insert into RATINGS values(100,5,10);
+ERROR 1146 (42S02): Table '5cs3_b2_movie.RATINGS' doesn't exist
+mysql> insert into RATING values(100,5,10);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> DESC RATING;
++-----------+---------+------+-----+---------+-------+
+| Field     | Type    | Null | Key | Default | Extra |
++-----------+---------+------+-----+---------+-------+
+| mov_id    | int(10) | YES  | MUL | NULL    |       |
+| rev_stars | int(10) | YES  |     | NULL    |       |
++-----------+---------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> drop table RATING;
+Query OK, 0 rows affected (0.17 sec)
+
+mysql> create table RATINGS(mov_id int(10)primary key,rev_stars int(10),no_of_rating int(10),foreign key(mov_id) refrences MOVIES(mov_id) on update cascade on delete cascade);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'refrences MOVIES(mov_id) on update cascade on delete cascade)' at line 1
+mysql> create table RATINGS(mov_id int(10)primary key,rev_stars int(10),no_of_rating int(10),foreign key(mov_id) references MOVIES(mov_id) on update cascade on
+delete cascade);
+Query OK, 0 rows affected (0.15 sec)
+
+mysql> insert into RATINGS values(100,5,10);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into RATINGS values(101,4,9);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into RATINGS values(102,5,10);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into RATINGS values(103,4,9);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into RATINGS values(104,5,10);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into RATINGS values(105,5,10);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into RATINGS values(106,5,10);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into RATINGS values(107,3,8);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into RATINGS values(108,3,8);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into RATINGS values(109,1,6);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into RATINGS values(110,4,9);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from RATINGS;
++--------+-----------+--------------+
+| mov_id | rev_stars | no_of_rating |
++--------+-----------+--------------+
+|    100 |         5 |           10 |
+|    101 |         4 |            9 |
+|    102 |         5 |           10 |
+|    103 |         4 |            9 |
+|    104 |         5 |           10 |
+|    105 |         5 |           10 |
+|    106 |         5 |           10 |
+|    107 |         3 |            8 |
+|    108 |         3 |            8 |
+|    109 |         1 |            6 |
+|    110 |         4 |            9 |
++--------+-----------+--------------+
+11 rows in set (0.00 sec)
+
+mysql> select mov_title from MOVIES as m,DIRECTOR as d where m.dir_id=d.dir_id and d.dir_name="Hitchcock";
++-----------+
+| mov_title |
++-----------+
+| M8        |
+| M9        |
+| M10       |
++-----------+
+3 rows in set (0.01 sec)
+
+mysql> select mov_title from MOVIES where mov_id in(select mov_id from MOVIE_CAST where act_id in(select act_id from MOVIE_CAST group by act_id having count(act_id)>1));
++-----------+
+| mov_title |
++-----------+
+| M1        |
+| M3        |
+| M4        |
+| M5        |
+| M6        |
+| M9        |
++-----------+
+6 rows in set (0.05 sec)
+
+mysql> select act_name from ACTOR where act_id in(select act_id from(MOVIES join MOVIE_CAST on MOVIES.mov_id=MOVIE_CAST.mov_id)where mov_year<2000 or mov_year>2015);
++----------+
+| act_name |
++----------+
+| rupert   |
+| robert   |
+| jennifer |
++----------+
+3 rows in set (0.00 sec)
+
+mysql> select mov_title,rev_stars from MOVIES,RATINGS where MOVIES.mov_id=RATINGS.mov_id and rev_stars order by rev_stars desc;
++-----------+-----------+
+| mov_title | rev_stars |
++-----------+-----------+
+| M1        |         5 |
+| M3        |         5 |
+| M5        |         5 |
+| M6        |         5 |
+| M7        |         5 |
+| M2        |         4 |
+| M4        |         4 |
+| M11       |         4 |
+| M8        |         3 |
+| M9        |         3 |
+| M10       |         1 |
++-----------+-----------+
+11 rows in set (0.00 sec)
+
+
+mysql> update RATINGS set rev_stars=5 where mov_id in(select MOVIES.mov_id from
+DIRECTOR,MOVIES where DIRECTOR.dir_id=MOVIES.dir_id and dir_name="steven");
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from RATINGS;
++--------+-----------+--------------+
+| mov_id | rev_stars | no_of_rating |
++--------+-----------+--------------+
+|    100 |         5 |           10 |
+|    101 |         4 |            9 |
+|    102 |         5 |           10 |
+|    103 |         4 |            9 |
+|    104 |         5 |           10 |
+|    105 |         5 |           10 |
+|    106 |         5 |           10 |
+|    107 |         3 |            8 |
+|    108 |         3 |            8 |
+|    109 |         1 |            6 |
+|    110 |         5 |            9 |
++--------+-----------+--------------+
+11 rows in set (0.00 sec)
+
+
+mysql> 
+
+
+
