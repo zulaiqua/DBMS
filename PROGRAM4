@@ -1,0 +1,346 @@
+4th program
+
+mysql> use 5cs3_b2_college;
+Database changed
+mysql> show tables;
+Empty set (0.00 sec)
+
+mysql> create  table STUDENT(usn varchar(15),sname varchar(15),address varchar(30),phone int(15),gender varchar(10),primary key(usn));
+Query OK, 0 rows affected (0.25 sec)
+
+mysql> create table SEMSEC(ssid varchar(10)primary key,sem int(5),sec varchar(5));
+Query OK, 0 rows affected (0.14 sec)
+
+mysql> create table CLASS(usn varchar(15)primary key,ssid varchar(5),foreign key(usn) references STUDENT(usn) on delete cascade on update cascade,foreign key(ssid) references SEMSEC(ssid) on delete cascade on update cascade);
+Query OK, 0 rows affected (0.20 sec)
+
+mysql> create table COURSE(subcode varchar(15)primary key,title varchar(15),sem int(5),credits int(5));
+Query OK, 0 rows affected (0.14 sec)
+
+
+mysql> create table IAMARKS(usn varchar(15),subcode varchar(15),ssid varchar(15),test1 int(5),test2 int(5),test3 int(5),finalia int(5),primary key(usn,subcode,ssid),foreign key(usn) references STUDENT(usn) on delete cascade on update cascade,foreign key(subcode)references COURSE(subcode) on delete cascade on update cascade,foreign key(ssid) references SEMSEC(ssid) on delete cascade on update cascade);
+Query OK, 0 rows affected (0.28 sec)
+
+mysql> insert into STUDENT values("1BI15CS100","alex","houstan",12345671,"M");
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into STUDENT values("1BI15CS101","adam","new york",12345672,"M");
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into STUDENT values("1BI15CS102","alice","new york",12345673,"F"); 
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into STUDENT values("1BI15CS103","alena","holland",12345674,"F");Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into STUDENT values("1BI15CS104","ann","germany",12345675,"F");
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into STUDENT values("1BI15CS105","bob","paris",12345676,"M");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into STUDENT values("1BI15CS106","ben","houstan",12345677,"M");
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into STUDENT values("1BI15CS107","carol","germany",12345678,"F");
+Query OK, 1 row affected (0.03 sec)
+
+
+
+
+mysql> insert into SEMSEC values("2a",2,"a");
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into SEMSEC values("2b",2,"b");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into SEMSEC values("2c",2,"c");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into SEMSEC values("3a",3,"a");
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into SEMSEC values("4c",4,"c");
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into SEMSEC values("8a",8,"a");
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into SEMSEC values("8b",8,"b");
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into SEMSEC values("8c",8,"c");
+Query OK, 1 row affected (0.03 sec)
+
+
+
+
+mysql> insert into CLASS values("1BI15CS100","2a");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into CLASS values("1BI15CS101","2b");
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into CLASS values("1BI15CS102","2c");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into CLASS values("1BI15CS103","3a");
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into CLASS values("1BI15CS104","4c");
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into CLASS values("1BI15CS105","8a");
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into CLASS values("1BI15CS106","8b");
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into CLASS values("1BI15CS107","8c");
+Query OK, 1 row affected (0.03 sec)
+
+
+
+
+mysql> insert into COURSE values("15cs21","me",2,2);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into COURSE values("15cs22","ds",2,4);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into COURSE values("15cs23","dms",2,3);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into COURSE values("15cs31","m3",3,2);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into COURSE values("15cs42","se",4,2);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into COURSE values("15cs81","co",8,3);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into COURSE values("15cs82","dbms",8,4);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into COURSE values("15cs83","cns",8,4);
+Query OK, 1 row affected (0.03 sec)
+
+
+
+mysql> insert into IAMARKS values("1BI15CS100","15cs21","2a",18,19,19,0);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into IAMARKS values("1BI15CS101","15cs22","2B",17,14,12,0);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into IAMARKS values("1BI15CS102","15cs23","2c",13,14,14,0);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into IAMARKS values("1BI15CS103","15cs31","3a",17,16,18,0);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into IAMARKS values("1BI15CS104","15cs42","4c",14,15,16,0);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into IAMARKS values("1BI15CS105","15cs81","8a",12,13,14,0);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into IAMARKS values("1BI15CS106","15cs82","8b",19,19,19,0);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into IAMARKS values("1BI15CS107","15cs83","8c",15,16,15,0);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from IAMARKS;
++------------+---------+------+-------+-------+-------+---------+
+| usn        | subcode | ssid | test1 | test2 | test3 | finalia |
++------------+---------+------+-------+-------+-------+---------+
+| 1BI15CS100 | 15cs21  | 2a   |    18 |    19 |    19 |       0 |
+| 1BI15CS101 | 15cs22  | 2B   |    17 |    14 |    12 |       0 |
+| 1BI15CS102 | 15cs23  | 2c   |    13 |    14 |    14 |       0 |
+| 1BI15CS103 | 15cs31  | 3a   |    17 |    16 |    18 |       0 |
+| 1BI15CS104 | 15cs42  | 4c   |    14 |    15 |    16 |       0 |
+| 1BI15CS105 | 15cs81  | 8a   |    12 |    13 |    14 |       0 |
+| 1BI15CS106 | 15cs82  | 8b   |    19 |    19 |    19 |       0 |
+| 1BI15CS107 | 15cs83  | 8c   |    15 |    16 |    15 |       0 |
++------------+---------+------+-------+-------+-------+---------+
+8 rows in set (0.00 sec)
+
+mysql> select s.sname,s.gender,sa.sec,c.usn,s.address from STUDENT s,CLASS c,SEM
+SEC sa where sa.ssid=c.ssid and c.usn=s.usn and sa.sec='c' and sa.sem=4;
++-------+--------+------+------------+---------+
+| sname | gender | sec  | usn        | address |
++-------+--------+------+------------+---------+
+| ann   | F      | c    | 1BI15CS104 | germany |
++-------+--------+------+------------+---------+
+1 row in set (0.02 sec)
+
+
+mysql> select sa.sem,sa.sec,count(*)Total from STUDENT s,SEMSEC sa,CLASS c where s.usn=c.usn and sa.ssid=c.ssid group by sa.sem,sa.sec,s.gender;
++------+------+-------+
+| sem  | sec  | Total |
++------+------+-------+
+|    2 | a    |     1 |
+|    2 | b    |     1 |
+|    2 | c    |     1 |
+|    3 | a    |     1 |
+|    4 | c    |     1 |
+|    8 | a    |     1 |
+|    8 | b    |     1 |
+|    8 | c    |     1 |
++------+------+-------+
+8 rows in set (0.00 sec)
+
+mysql> insert into STUDENT values("1BI15CS108","john","new york",12345679,"M");Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into SEMSEC values("8d",4,"c");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into CLASS values("1BI15CS108","4c");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into COURSE values("15cs84","maths",8,4);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into IAMARKS values("1BI15CS108","15cs84","8d",15,16,15,0);
+Query OK, 1 row affected (0.02 sec)
+
+
+mysql> select sem,sec,count(gender),gender from STUDENT,SEMSEC,CLASS where STUDENT.usn=CLASS.usn and SEMSEC.ssid=CLASS.ssid group by sem,sec,gender;
++------+------+---------------+--------+
+| sem  | sec  | count(gender) | gender |
++------+------+---------------+--------+
+|    2 | a    |             1 | M      |
+|    2 | b    |             1 | M      |
+|    2 | c    |             1 | F      |
+|    3 | a    |             1 | F      |
+|    4 | c    |             1 | F      |
+|    4 | c    |             1 | M      |
+|    8 | a    |             1 | M      |
+|    8 | b    |             1 | M      |
+|    8 | c    |             1 | F      |
++------+------+---------------+--------+
+9 rows in set (0.00 sec)
+
+mysql> update STUDENT set gender="F" where sname="john";
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select sem,sec,count(gender),gender from STUDENT,SEMSEC,CLASS where STUDENT.usn=CLASS.usn and SEMSEC.ssid=CLASS.ssid group by sem,sec,gender;
++------+------+---------------+--------+
+| sem  | sec  | count(gender) | gender |
++------+------+---------------+--------+
+|    2 | a    |             1 | M      |
+|    2 | b    |             1 | M      |
+|    2 | c    |             1 | F      |
+|    3 | a    |             1 | F      |
+|    4 | c    |             2 | F      |
+|    8 | a    |             1 | M      |
+|    8 | b    |             1 | M      |
+|    8 | c    |             1 | F      |
++------+------+---------------+--------+
+8 rows in set (0.00 sec)
+
+mysql> create view v1 as select test1,subcode from STUDENT where usn="1BI15CS101";
+ERROR 1054 (42S22): Unknown column 'test1' in 'field list'
+mysql> create view v1 as select test1,subcode from IAMARKS where usn="1BI15CS101";
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> select * from v1;
++-------+---------+
+| test1 | subcode |
++-------+---------+
+|    17 | 15cs22  |
++-------+---------+
+1 row in set (0.00 sec)
+
+mysql> select * from IAMARKS;
++------------+---------+------+-------+-------+-------+---------+
+| usn        | subcode | ssid | test1 | test2 | test3 | finalia |
++------------+---------+------+-------+-------+-------+---------+
+| 1BI15CS100 | 15cs21  | 2a   |    18 |    19 |    19 |       0 |
+| 1BI15CS101 | 15cs22  | 2B   |    17 |    14 |    12 |       0 |
+| 1BI15CS102 | 15cs23  | 2c   |    13 |    14 |    14 |       0 |
+| 1BI15CS103 | 15cs31  | 3a   |    17 |    16 |    18 |       0 |
+| 1BI15CS104 | 15cs42  | 4c   |    14 |    15 |    16 |       0 |
+| 1BI15CS105 | 15cs81  | 8a   |    12 |    13 |    14 |       0 |
+| 1BI15CS106 | 15cs82  | 8b   |    19 |    19 |    19 |       0 |
+| 1BI15CS107 | 15cs83  | 8c   |    15 |    16 |    15 |       0 |
+| 1BI15CS108 | 15cs84  | 8d   |    15 |    16 |    15 |       0 |
++------------+---------+------+-------+-------+-------+---------+
+9 rows in set (0.00 sec)
+
+mysql> update IAMARKS set finalia=greatest(test1+test2+test3,test1+test3)/2;
+Query OK, 9 rows affected (0.03 sec)
+Rows matched: 9  Changed: 9  Warnings: 0
+
+mysql> select * from IAMARKS;
++------------+---------+------+-------+-------+-------+---------+
+| usn        | subcode | ssid | test1 | test2 | test3 | finalia |
++------------+---------+------+-------+-------+-------+---------+
+| 1BI15CS100 | 15cs21  | 2a   |    18 |    19 |    19 |      28 |
+| 1BI15CS101 | 15cs22  | 2B   |    17 |    14 |    12 |      22 |
+| 1BI15CS102 | 15cs23  | 2c   |    13 |    14 |    14 |      21 |
+| 1BI15CS103 | 15cs31  | 3a   |    17 |    16 |    18 |      26 |
+| 1BI15CS104 | 15cs42  | 4c   |    14 |    15 |    16 |      23 |
+| 1BI15CS105 | 15cs81  | 8a   |    12 |    13 |    14 |      20 |
+| 1BI15CS106 | 15cs82  | 8b   |    19 |    19 |    19 |      29 |
+| 1BI15CS107 | 15cs83  | 8c   |    15 |    16 |    15 |      23 |
+| 1BI15CS108 | 15cs84  | 8d   |    15 |    16 |    15 |      23 |
++------------+---------+------+-------+-------+-------+---------+
+9 rows in set (0.00 sec)
+
+mysql> update IAMARKS set finalia=greatest(test1+test2,test2+test3,test1+test3)/
+2;
+Query OK, 9 rows affected (0.03 sec)
+Rows matched: 9  Changed: 9  Warnings: 0
+
+mysql> select * from IAMARKS;
++------------+---------+------+-------+-------+-------+---------+
+| usn        | subcode | ssid | test1 | test2 | test3 | finalia |
++------------+---------+------+-------+-------+-------+---------+
+| 1BI15CS100 | 15cs21  | 2a   |    18 |    19 |    19 |      19 |
+| 1BI15CS101 | 15cs22  | 2B   |    17 |    14 |    12 |      16 |
+| 1BI15CS102 | 15cs23  | 2c   |    13 |    14 |    14 |      14 |
+| 1BI15CS103 | 15cs31  | 3a   |    17 |    16 |    18 |      18 |
+| 1BI15CS104 | 15cs42  | 4c   |    14 |    15 |    16 |      16 |
+| 1BI15CS105 | 15cs81  | 8a   |    12 |    13 |    14 |      14 |
+| 1BI15CS106 | 15cs82  | 8b   |    19 |    19 |    19 |      19 |
+| 1BI15CS107 | 15cs83  | 8c   |    15 |    16 |    15 |      16 |
+| 1BI15CS108 | 15cs84  | 8d   |    15 |    16 |    15 |      16 |
++------------+---------+------+-------+-------+-------+---------+
+9 rows in set (0.00 sec)
+
+
+mysql> select *, (CASE when finalia>=17 and finalia<=20 then "outstanding" when
+finalia>=12 and finalia<=16 then "average" when finalia<12 then "weak" END) as CAT from IAMARKS,SEMSEC where IAMARKS.ssid=SEMSEC.ssid and SEMSEC.sem=8 and SEMSEC.sec IN("a","b","c");
++------------+---------+------+-------+-------+-------+---------+------+------+------+-------------+
+| usn        | subcode | ssid | test1 | test2 | test3 | finalia | ssid | sem  | sec  | CAT         |
++------------+---------+------+-------+-------+-------+---------+------+------+------+-------------+
+| 1BI15CS105 | 15cs81  | 8a   |    12 |    13 |    14 |      14 | 8a   |    8 | a    | average     |
+| 1BI15CS106 | 15cs82  | 8b   |    19 |    19 |    19 |      19 | 8b   |    8 | b    | outstanding |
+| 1BI15CS107 | 15cs83  | 8c   |    15 |    16 |    15 |      16 | 8c   |    8 | c    | average     |
++------------+---------+------+-------+-------+-------+---------+------+------+------+-------------+
+3 rows in set (0.00 sec)
+
+
+mysql> select s.usn,s.sname,ia.finalia,(CASE when finalia>=17 and finalia<=20 then "outstanding" when finalia>=12 and finalia<=16 then "average" when finalia<12 then "weak" END) as CAT from STUDENT s,IAMARKS ia,SEMSEC sc where ia.usn=s.usn and ia.ssid=sc.ssid and sc.sem=8 and sc.sec IN("a","b","c");
++------------+-------+---------+-------------+
+| usn        | sname | finalia | CAT         |
++------------+-------+---------+-------------+
+| 1BI15CS105 | bob   |      14 | average     |
+| 1BI15CS106 | ben   |      19 | outstanding |
+| 1BI15CS107 | carol |      16 | average     |
++------------+-------+---------+-------------+
+3 rows in set (0.00 sec)
+
+mysql> create view v2 as select usn,test1,subcode from IAMARKS where usn="1BI15CS101";
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> select * from v2;
++------------+-------+---------+
+| usn        | test1 | subcode |
++------------+-------+---------+
+| 1BI15CS101 |    17 | 15cs22  |
++------------+-------+---------+
+1 row in set (0.00 sec)
